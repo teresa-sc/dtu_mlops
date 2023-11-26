@@ -1,8 +1,14 @@
 ![Logo](../figures/icons/pytorch.png){ align=right width="130"}
 
-# Local Deployment
+# Local Deployment with Torchserve
 
 ---
+
+!!! warning "Outdated module"
+
+   This module was previously part of the main course, but has been moved to the extra modules because it may be a bit
+   outdated and has been replaced with [this module](../s7_deployment/ml_deployment.md) that uses BentoML instead of
+   TorchServe.
 
 Regardless of your application, model and usecase, the first starting point of serving your model should always be to
 deploy it locally. The simple reason for that is debugging: if you deploy directly to the cloud you often get less
