@@ -563,26 +563,3 @@ This ends the module on APIs. If you want to go further in this direction we hig
 APIs and services for machine learning applications. Additionally, we can also highly recommend checking out
 [Postman](https://www.postman.com/) that can help design, document and in particular test the API you are writing to
 make sure that they work as expected.
-
-<!---
-## BentoML
-
-[bentoml](https://github.com/bentoml/BentoML)
-
-In particular
-
-```python
-bentoml.pytorch_lightning.save_model
-bentoml.pytorch.save
-bentoml.onnx.save_model
-```
-
-```python
-runner = bentoml.pytorch.get("my_torch_model").to_runner()
-svc = bentoml.Service(name="test_service", runners=[runner])
-@svc.api(input=JSON(), output=JSON())
-async def predict(json_obj: JSONSerializable) -> JSONSerializable:
-    batch_ret = await runner.async_run([json_obj])
-    return batch_ret[0]
-```
---->
