@@ -156,3 +156,10 @@ node_modules/
 latest_info.csv
 latest_repo_data.csv
 repo_data.csv
+
+# non-commit folders made by exercises
+wandb/
+log/
+profiler/
+datasets/
+
