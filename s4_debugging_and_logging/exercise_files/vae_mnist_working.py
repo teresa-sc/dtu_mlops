@@ -2,6 +2,8 @@
 
 A simple implementation of Gaussian MLP Encoder and Decoder trained on MNIST
 """
+import os
+import wandb
 import torch
 import torch.nn as nn
 import torchvision.transforms as transforms
@@ -21,12 +23,14 @@ latent_dim = 20
 lr = 1e-3
 epochs = 5
 
-
+wandb.init(project="mnist_mlops", name="vae_mnist")
 # Data loading
-mnist_transform = transforms.Compose([transforms.ToTensor()])
+#mnist_transform = transforms.Compose([transforms.ToTensor()])
+#train_dataset = MNIST(dataset_path, transform=mnist_transform, train=True, download=True)
+#test_dataset = MNIST(dataset_path, transform=mnist_transform, train=False, download=True)
 
-train_dataset = MNIST(dataset_path, transform=mnist_transform, train=True, download=True)
-test_dataset = MNIST(dataset_path, transform=mnist_transform, train=False, download=True)
+train_dataset = torch.load("datasets/train_dataset.pt")
+test_dataset = torch.load("datasets/test_dataset.pt")
 
 train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
@@ -143,6 +147,7 @@ for epoch in range(epochs):
         "\tAverage Loss: ",
         overall_loss / (batch_idx * batch_size),
     )
+    wandb.log({"loss": overall_loss / (batch_idx * batch_size)})
 print("Finish!!")
 
 # Generate reconstructions
@@ -158,6 +163,7 @@ with torch.no_grad():
 
 save_image(x.view(batch_size, 1, 28, 28), "orig_data.png")
 save_image(x_hat.view(batch_size, 1, 28, 28), "reconstructions.png")
+wandb.log({"Reconstructions": wandb.Image("reconstructions.png")})
 
 # Generate samples
 with torch.no_grad():
